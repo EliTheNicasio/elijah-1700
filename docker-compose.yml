@@ -1,0 +1,5 @@
+services:
+  ui:
+    build: ./UI
+    ports:
+      - "10101:10101"
