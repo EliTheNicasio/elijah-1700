@@ -2,8 +2,9 @@ services:
   ui:
     build: ./UI
     ports:
-    - "10101:10101"
+      - "10101:10101"
+      - "8000:8000"
   api:
     build: ./API-Service
     ports:
-      - "8000:8000"
+      - "5000:5000"

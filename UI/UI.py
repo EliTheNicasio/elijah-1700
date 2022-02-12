@@ -1,13 +1,20 @@
 from h2o_wave import Q, main, app, ui
+import requests
 
 textToAnalyze = ''
+analyzedText = ''
 
 @app('/')
 async def serve(q: Q):
     global textToAnalyze
+    global analyzedText
     
     if q.args.analyze:
         textToAnalyze = q.args.submittedText
+        url = 'http://api:5000/' + textToAnalyze
+        r = requests.get(url, timeout=5)
+        analyzedText = r.url
+        #analyzedText = textToAnalyze
 
     # Display a form on the page
     q.page['REM'] = ui.form_card(
@@ -16,7 +23,7 @@ async def serve(q: Q):
             ui.text_xl('Enter text to analyze'),
             ui.textbox(name='submittedText', label=''),
             ui.button(name='analyze', label='Analyze'),
-            ui.text_xl(textToAnalyze),
+            ui.text_xl(analyzedText),
         ],
     )
     

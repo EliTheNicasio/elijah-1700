@@ -1,8 +1,7 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 
 app = FastAPI()
 
-
-@app.get("/{remText}")
-async def readText(remText):
-    return {"message": "Look: " + remText}
+@app.get("/{textInit}")
+async def analyzeText(textInit):
+    return {"message": "MF_" + textInit}
