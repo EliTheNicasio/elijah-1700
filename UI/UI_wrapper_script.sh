@@ -1,9 +1,10 @@
 #!/bin/bash
 
-set -m
+./waved &
 
-./wave/waved -web-dir "/wave/www"&
+wave run --no-reload --no-autostart UI.py &
 
-python3 /usr/src/app/UI.py&
+wait -n
 
-fg %1
+exit $?
+
