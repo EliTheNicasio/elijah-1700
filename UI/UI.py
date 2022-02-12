@@ -1,20 +1,22 @@
 from h2o_wave import Q, main, app, ui
 
-bean_count = 0
+textToAnalyze = ''
 
-@app('/counter')
+@app('/')
 async def serve(q: Q):
-    global bean_count
-    # Was the 'increment' button clicked?
-    if q.args.increment:
-        bean_count += 1
+    global textToAnalyze
+    
+    if q.args.analyze:
+        textToAnalyze = q.args.submittedText
 
     # Display a form on the page
-    q.page['beans'] = ui.form_card(
-        box='1 1 1 2',
+    q.page['REM'] = ui.form_card(
+        box='1 1 2 4',
         items=[
-            ui.text_xl('Beans!'),
-            ui.button(name='increment', label=f'{bean_count} beans'),
+            ui.text_xl('Enter text to analyze'),
+            ui.textbox(name='submittedText', label=''),
+            ui.button(name='analyze', label='Analyze'),
+            ui.text_xl(textToAnalyze),
         ],
     )
     
