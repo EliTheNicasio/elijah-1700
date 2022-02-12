@@ -12,9 +12,8 @@ async def serve(q: Q):
     if q.args.analyze:
         textToAnalyze = q.args.submittedText
         url = 'http://api:5000/' + textToAnalyze
-        r = requests.get(url, timeout=5)
-        analyzedText = r.url
-        #analyzedText = textToAnalyze
+        r = requests.get(url)
+        analyzedText = r.text[1:-1]
 
     # Display a form on the page
     q.page['REM'] = ui.form_card(
